@@ -1,4 +1,4 @@
-<%= form_for(@bid) do |f| %>
+<%= form_for [@auction, @bid] do |f| %>
   <% if @bid.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@bid.errors.count, "error") %> prohibited this bid from being saved:</h2>
@@ -12,20 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :bid_date %><br>
-    <%= f.date_select :bid_date %>
-  </div>
-  <div class="field">
     <%= f.label :offer_price %><br>
     <%= f.text_field :offer_price %>
-  </div>
-  <div class="field">
-    <%= f.label :current_price %><br>
-    <%= f.text_field :current_price %>
-  </div>
-  <div class="field">
-    <%= f.label :auction_id %><br>
-    <%= f.text_field :auction_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

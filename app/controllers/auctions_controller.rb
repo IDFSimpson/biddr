@@ -10,6 +10,7 @@ class AuctionsController < ApplicationController
   # GET /auctions/1
   # GET /auctions/1.json
   def show
+    @bid = Bid.new
   end
 
   # GET /auctions/new
@@ -25,6 +26,7 @@ class AuctionsController < ApplicationController
   # POST /auctions.json
   def create
     @auction = Auction.new(auction_params)
+    @auction.current_price = 0
 
     respond_to do |format|
       if @auction.save
@@ -69,6 +71,6 @@ class AuctionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def auction_params
-      params.require(:auction).permit(:title, :details, :ends, :reserve_price, :current_price)
+      params.require(:auction).permit(:title, :details, :ends, :reserve_price)
     end
 end
