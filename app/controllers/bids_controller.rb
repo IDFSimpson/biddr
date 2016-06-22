@@ -29,6 +29,7 @@ class BidsController < ApplicationController
     @bid = Bid.new(bid_params)
     @bid.auction = @auction
     @bid.bid_date = Time.now
+    @bid.user = current_user
 
     respond_to do |format|
       if highest_bid && @bid.save

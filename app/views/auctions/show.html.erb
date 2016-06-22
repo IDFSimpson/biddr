@@ -31,7 +31,7 @@
 
 <div id="previous_bids">
   <% @auction.bids.each do |bid| %>
-    <div><%= number_to_currency(bid.offer_price) %> at <%= bid.bid_date %></div>
+    <div><%= number_to_currency(bid.offer_price) %> by <%= bid.user.email %> at <%= bid.bid_date %></div>
   <% end %>
 </div>
 
