@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :ends %><br>
-    <%= f.date_select :ends %>
+    <%= f.text_field :ends %>
   </div>
   <div class="field">
     <%= f.label :reserve_price %><br>
@@ -31,3 +31,9 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+<script>
+  var picker = new Pikaday({ field: $('#auction_ends')[0],
+                             format: ' YYYY mm dd',
+                           });
+</script>
