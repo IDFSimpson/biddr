@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :auctions do
-    resources :bids
+    resources :bids, only: [:new, :create]
+    resources :publishings, only: [] do
+      patch :update, on: :collection
+    end
   end
   resources :user_bids
 

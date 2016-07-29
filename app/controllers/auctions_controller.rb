@@ -28,6 +28,7 @@ class AuctionsController < ApplicationController
   def create
     @auction = Auction.new(auction_params)
     @auction.current_price = 0
+    @auction.user = current_user
 
     respond_to do |format|
       if @auction.save
