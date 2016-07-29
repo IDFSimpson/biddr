@@ -1,0 +1,2 @@
+module UserBidsHelper
+end
