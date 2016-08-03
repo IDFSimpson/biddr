@@ -7,12 +7,12 @@
 
 <p>
   <strong>Offer price:</strong>
-  <%= @bid.offer_price %>
+  <%= number_to_currency(@bid.offer_price) %>
 </p>
 
 <p>
   <strong>Current price:</strong>
-  <%= @bid.current_price %>
+  <%= number_to_currency(bid.current_price) %>
 </p>
 
 <p>

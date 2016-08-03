@@ -20,8 +20,8 @@
         <td><%= auction.title %></td>
         <td><%= auction.details %></td>
         <td><%= auction.ends %></td>
-        <td><%= auction.reserve_price %></td>
-        <td><%= auction.current_price %></td>
+        <td><%= number_to_currency(auction.reserve_price) %></td>
+        <td><%= number_to_currency(auction.current_price) %></td>
         <td><%= link_to 'Show', auction %></td>
         <td><%= link_to 'Edit', edit_auction_path(auction) %></td>
         <td><%= link_to 'Destroy', auction, method: :delete, data: { confirm: 'Are you sure?' } %></td>

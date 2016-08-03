@@ -17,8 +17,8 @@
     <% @bids.each do |bid| %>
       <tr>
         <td><%= bid.bid_date %></td>
-        <td><%= bid.offer_price %></td>
-        <td><%= bid.auction.current_price %></td>
+        <td><%= number_to_currency(bid.offer_price) %></td>
+        <td><%= number_to_currency(bid.auction.current_price) %></td>
         <td><%= link_to bid.auction.title, bid.auction %></td>
       </tr>
     <% end %>
