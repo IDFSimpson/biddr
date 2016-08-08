@@ -3,7 +3,11 @@ class PublishingsController < ApplicationController
 
   def update
     auction = current_user.auctions.find(params[:auction_id])
-    auction.publish!
-    redirect_to auction_path(auction), notice: "Auction has been published!"
+    service = Auctions::PublishAuction.new(auction: auction)
+    if service.call
+      redirect_to service.auction, notice: "Auction has been published!"
+    else
+      redirect_to service.auction, alert: "Auction has not been published"
+    end
   end
 end

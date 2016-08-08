@@ -26,15 +26,14 @@ class AuctionsController < ApplicationController
   # POST /auctions
   # POST /auctions.json
   def create
-    @auction = Auction.new(auction_params)
-    @auction.current_price = 0
-    @auction.user = current_user
+    service = Auctions::CreateAuction.new(user: current_user, params: auction_params)
 
     respond_to do |format|
-      if @auction.save
-        format.html { redirect_to @auction, notice: 'Auction was successfully created.' }
-        format.json { render :show, status: :created, location: @auction }
+      if service.call
+        format.html { redirect_to service.auction, notice: 'Auction was successfully created.' }
+        format.json { render :show, status: :created, location: service.auction }
       else
+        @auction = service.auction
         format.html { render :new }
         format.json { render json: @auction.errors, status: :unprocessable_entity }
       end
