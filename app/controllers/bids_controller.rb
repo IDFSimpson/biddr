@@ -33,28 +33,15 @@ class BidsController < ApplicationController
     @bid.user = current_user
 
     respond_to do |format|
-      if highest_bid && @bid.save
+      if highest_bid? && @bid.save
         @auction.current_price = @bid.offer_price
+        check_and_set_reserve
         @auction.save
 
         format.html { redirect_to @auction, notice: 'Bid was successfully created.' }
         format.json { render :show, status: :created, location: @bid }
       else
         format.html { render "auctions/show" }
-        format.json { render json: @bid.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /bids/1
-  # PATCH/PUT /bids/1.json
-  def update
-    respond_to do |format|
-      if @bid.update(bid_params)
-        format.html { redirect_to @auction, notice: 'Bid was successfully updated.' }
-        format.json { render :show, status: :ok, location: @bid }
-      else
-        format.html { render :edit }
         format.json { render json: @bid.errors, status: :unprocessable_entity }
       end
     end
@@ -85,7 +72,14 @@ class BidsController < ApplicationController
       @auction = Auction.find params[:auction_id]
     end
 
-    def highest_bid
-      @bid.offer_price > @auction.current_price && @bid.offer_price > @auction.reserve_price
+    def highest_bid?
+      @bid.offer_price > @auction.current_price
     end
+
+    def check_and_set_reserve
+      if @bid.offer_price >= @auction.reserve_price
+        @auction.meet_reserve
+      end
+    end
+
 end

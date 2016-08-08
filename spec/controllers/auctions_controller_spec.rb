@@ -1,9 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe AuctionsController, type: :controller do
+
+  let(:user) { FactoryGirl.create(:user) }
+
   describe "#new" do
+    before { sign_in user }
+
     let(:auction) { FactoryGirl.create(:auction) }
-    before {get :new}
+    before { get :new }
     it "renders the new template" do
       expect(response).to render_template(:new)
     end
@@ -15,6 +20,7 @@ RSpec.describe AuctionsController, type: :controller do
 
   describe "#create" do
     describe "with valid attributes" do
+      before { sign_in user }
       let(:valid_request) { post :create, auction: FactoryGirl.attributes_for(:auction) }
 
       it "saves a record to the database" do
