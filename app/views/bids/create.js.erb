@@ -1,0 +1,3 @@
+$("#previous_bids").append("<%= j render 'bids/bid', bid: @bid, style: 'display: none' %>");
+$("#current_price").html("<%= number_to_currency(@bid.auction.current_price) %>");
+$("#bid_form").html("<%= j render 'bids/form', bid: Bid.new %>");

@@ -7,5 +7,4 @@ class Bid < ActiveRecord::Base
   validates :user, presence: true
   validates :auction, presence: true
 
-
 end

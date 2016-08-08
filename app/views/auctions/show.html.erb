@@ -22,7 +22,7 @@
 
 <p>
   <strong>Current price:</strong>
-  <%= number_to_currency(@auction.current_price) %>
+  <span id="current_price"><%= number_to_currency(@auction.current_price) %></span>
 </p>
 
 <div id="bid_form">
@@ -31,7 +31,7 @@
 
 <div id="previous_bids">
   <% @auction.bids.each do |bid| %>
-    <div><%= number_to_currency(bid.offer_price) %> by <%= bid.user.email %> at <%= bid.bid_date %></div>
+    <%= render "/bids/bid", bid: bid %>
   <% end %>
 </div>
 

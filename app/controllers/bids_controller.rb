@@ -39,9 +39,11 @@ class BidsController < ApplicationController
         @auction.save
 
         format.html { redirect_to @auction, notice: 'Bid was successfully created.' }
+        format.js   { render }
         format.json { render :show, status: :created, location: @bid }
       else
         format.html { render "auctions/show" }
+        format.js   { render js: "alert('Can\\'t bid, please try a valid bid!');"  }
         format.json { render json: @bid.errors, status: :unprocessable_entity }
       end
     end
@@ -54,6 +56,7 @@ class BidsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to bids_url, notice: 'Bid was successfully destroyed.' }
       format.json { head :no_content }
+      format.js   { render :destroy }
     end
   end
 
